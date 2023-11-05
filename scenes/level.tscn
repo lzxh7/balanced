@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://e6k73407y8gg"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_0h6hh"]
+[ext_resource type="Texture2D" uid="uid://cqqoy1fphqlwo" path="res://icon.svg" id="1_lsyja"]
+[ext_resource type="Script" path="res://scripts/draggable_rigid_body.gd" id="3_nw7gv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hdc6q"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_0h6hh")
+frozen = true
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(9, 5.0625)
+texture = ExtResource("1_lsyja")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground"]
+polygon = PackedVector2Array(208, 405, 356, 413, 361, 449, 483, 458, 485, 421, 662, 419, 669, 457, 789, 452, 791, 408, 950, 405, 945, 460, 853, 516, 561, 541, 305, 513, 211, 463)
+
+[node name="ScalePivot" type="RigidBody2D" parent="."]
+position = Vector2(575, 233)
+collision_layer = 2
+collision_mask = 2
+freeze = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ScalePivot"]
+scale = Vector2(0.31, 0.31)
+texture = ExtResource("1_lsyja")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="ScalePivot"]
+node_a = NodePath("../../Ground")
+node_b = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScalePivot"]
+shape = SubResource("CircleShape2D_hdc6q")
+
+[node name="NotDraggableArea" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NotDraggableArea"]
+polygon = PackedVector2Array(77, 223, 156, 237, 233, 185, 302, 203, 384, 178, 378, 127, 489, 96, 536, 148, 614, 145, 662, 88, 766, 125, 768, 172, 853, 212, 925, 180, 997, 240, 1155, 244, 1175, 659, -20, 675, -15, 210)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." node_paths=PackedStringArray("area")]
+position = Vector2(91, 95)
+input_pickable = true
+freeze = true
+freeze_mode = 1
+script = ExtResource("3_nw7gv")
+area = NodePath("../NotDraggableArea")
+
+[node name="Icon" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("1_lsyja")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+polygon = PackedVector2Array(64, -59.6, 64, 59, 59.6, 64, -59, 64, -64, 59.6, -64, -59.6, -59, -63.9, 59, -64)

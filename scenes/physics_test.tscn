@@ -1,0 +1,89 @@
+[gd_scene load_steps=3 format=3 uid="uid://q5pufxcq42s3"]
+
+[ext_resource type="Texture2D" uid="uid://cqqoy1fphqlwo" path="res://icon.svg" id="1_ahaqf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3j2s1"]
+friction = 0.0
+
+[node name="Main" type="Node2D"]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-434, 220)
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(370.25, 607.25)
+scale = Vector2(2.63672, 2.06641)
+texture = ExtResource("1_ahaqf")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+position = Vector2(370.25, 607.25)
+scale = Vector2(2.63672, 2.06641)
+polygon = PackedVector2Array(64, -59.6, 64, 59, 59.6, 64, -59, 64, -64, 59.6, -64, -59.6, -59, -63.9, 59, -64)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(98, 237)
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(615, 606)
+scale = Vector2(10.4531, 1.26563)
+texture = ExtResource("1_ahaqf")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(615, 606)
+scale = Vector2(10.4531, 1.26563)
+polygon = PackedVector2Array(64, -59.6, 64, 59, 59.6, 64, -59, 64, -64, 59.6, -64, -59.6, -59, -63.9, 59, -64)
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="."]
+position = Vector2(940, 463)
+mass = 3.0
+physics_material_override = SubResource("PhysicsMaterial_3j2s1")
+
+[node name="Icon" type="Sprite2D" parent="RigidBody2D2"]
+position = Vector2(63.4, -63.6)
+texture = ExtResource("1_ahaqf")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D2"]
+position = Vector2(63.4, -63.6)
+polygon = PackedVector2Array(64, -59.6, 64, 59, 59.6, 64, -59, 64, -64, 59.6, -64, -59.6, -59, -63.9, 59, -64)
+
+[node name="PinJoint2D" type="PinJoint2D" parent="RigidBody2D2"]
+position = Vector2(55, -276)
+node_a = NodePath("../../RigidBody2D3")
+node_b = NodePath("..")
+
+[node name="RigidBody2D3" type="RigidBody2D" parent="."]
+position = Vector2(684, 141)
+collision_layer = 2
+
+[node name="Icon" type="Sprite2D" parent="RigidBody2D3"]
+position = Vector2(-67.6, 58.4)
+texture = ExtResource("1_ahaqf")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D3"]
+position = Vector2(-67.6, 58.4)
+polygon = PackedVector2Array(64, -59.6, 64, 59, 59.6, 64, -59, 64, -64, 59.6, -64, -59.6, -59, -63.9, 59, -64)
+
+[node name="PinJoint2D" type="PinJoint2D" parent="RigidBody2D3"]
+position = Vector2(-68, 55)
+node_a = NodePath("..")
+node_b = NodePath("../../StaticBody2D2")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(170, 340)
+
+[node name="Icon" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(-67.6, 58.4)
+texture = ExtResource("1_ahaqf")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+position = Vector2(-67.6, 58.4)
+polygon = PackedVector2Array(64, -59.6, 64, 59, 59.6, 64, -59, 64, -64, 59.6, -64, -59.6, -59, -63.9, 59, -64)
+
+[node name="PinJoint2D" type="PinJoint2D" parent="RigidBody2D"]
+position = Vector2(-90, -148)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody2D3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(561, 308)
+zoom = Vector2(0.455, 0.455)
