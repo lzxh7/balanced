@@ -1,7 +1,7 @@
 class_name DraggableRigidBody
 extends RigidBody2D
 
-@export var area: Area2D
+@export var draggable_area: Area2D
 const ROTATION_SENSITIVITY := 0.025
 
 var dragging := false
@@ -32,11 +32,9 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 	if event.is_action_pressed("drag"):
 		if not rotating:
 			dragging = true
-			print("dragging")
 	if event.is_action_pressed("rotate"):
 		if not dragging:
 			rotating = true
-			print("rotating")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -46,7 +44,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		dragging = false
 	if event.is_action_released("rotate"):
 		rotating = false
-	
+
 	# freeze should be renamed frozen then this would be more readable
 	if event is InputEventMouseMotion and freeze:
 		if dragging:
@@ -57,12 +55,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(_delta: float) -> void:
 	# cmon this makes no sense "if freeze" no freeze is a verb not an adjective
-	# it should be frozen "if frozen" actually makes gramatical sense 
+	# it should be frozen "if frozen" actually makes gramatical sense
 	if freeze:
-		if area.overlaps_body(self):
+		if draggable_area.overlaps_body(self):
 			transform = _temp_transform
 		_temp_transform = Transform2D(transform)
-		
+
 		position += _accumulated_displacement
 		rotation += _accumulated_rotation
 		_accumulated_displacement = Vector2()
