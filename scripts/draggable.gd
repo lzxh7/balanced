@@ -1,16 +1,16 @@
-class_name DraggableRigidBody
-extends RigidBody2D
+class_name Draggable
+extends Node
 
-@export var draggable_area: Area2D
+@export var not_draggable_area: Area2D
+@export var warning_icon_texture: Texture2D = load("res://textures/warning_icon.png")
+
 const ROTATION_SENSITIVITY := 0.025
 
 var dragging := false
 var rotating := false
 
-var _accumulated_displacement := Vector2()
-var _accumulated_rotation := 0.0
-var _temp_transform: Transform2D
-
+@onready var parent: CollisionObject2D = $".."
+@onready var warning_icon := Sprite2D.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,7 +18,12 @@ func _ready() -> void:
 	# an input event like being clicked
 	# we manually connect the signal to our method by code to make so we don't
 	# have to do it manually every time we use this node
-	input_event.connect(_on_input_event)
+	parent.input_event.connect(_on_input_event)
+
+	parent.input_pickable = true
+
+	warning_icon.texture = warning_icon_texture
+	add_child(warning_icon)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,7 +41,6 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 		if not dragging:
 			rotating = true
 
-
 func _unhandled_input(event: InputEvent) -> void:
 	# _on_input_event is only triggered when the mouse is over the rb so we use
 	# _input for mouse motion and releasing the mouse
@@ -46,22 +50,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		rotating = false
 
 	# freeze should be renamed frozen then this would be more readable
-	if event is InputEventMouseMotion and freeze:
+	if event is InputEventMouseMotion and parent.freeze:
 		if dragging:
-			_accumulated_displacement += event.relative
+			parent.position += event.relative
 		if rotating:
-			_accumulated_rotation += event.relative.x * ROTATION_SENSITIVITY
+			parent.rotation += event.relative.x * ROTATION_SENSITIVITY
 
 
 func _physics_process(_delta: float) -> void:
-	# cmon this makes no sense "if freeze" no freeze is a verb not an adjective
-	# it should be frozen "if frozen" actually makes gramatical sense
-	if freeze:
-		if draggable_area.overlaps_body(self):
-			transform = _temp_transform
-		_temp_transform = Transform2D(transform)
-
-		position += _accumulated_displacement
-		rotation += _accumulated_rotation
-		_accumulated_displacement = Vector2()
-		_accumulated_rotation = 0.0
+	warning_icon.visible = parent.freeze and not_draggable_area.overlaps_body(parent)
+	warning_icon.position = parent.position

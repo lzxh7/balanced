@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bynkebya44ssj"]
+
+[ext_resource type="PackedScene" uid="uid://6rdn0anr74tq" path="res://scenes/physics_objects/box.tscn" id="1_n5uh3"]
+[ext_resource type="Texture2D" uid="uid://0yja0nf4wfg0" path="res://textures/small_box.png" id="2_g247f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shpjy"]
+size = Vector2(38.7343, 41.1832)
+
+[node name="SmallBox" instance=ExtResource("1_n5uh3")]
+mass = 0.5
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_g247f")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-0.280636, 0.254556)
+rotation = -0.0172449
+shape = SubResource("RectangleShape2D_shpjy")

@@ -4,7 +4,7 @@ extends Node
 
 @onready var ui: UI = $UI
 
-var level_node: Level
+var level: Level
 var level_id: int
 
 
@@ -19,11 +19,15 @@ func _process(_delta: float) -> void:
 
 
 func _on_go_button_pressed() -> void:
-	level_node.frozen = false
+	if level.can_start:
+		level.frozen = false
 
+func _on_level_completed() -> void:
+	print("Level Completed!")
 
 func load_level(id: int) -> void:
-	if level_node != null:
-		level_node.queue_free()
-	level_node = levels[id].instantiate()
-	add_child(level_node)
+	if level != null:
+		level.queue_free()
+	level = levels[id].instantiate() as Level
+	add_child(level)
+	level.level_completed.connect(_on_level_completed, CONNECT_ONE_SHOT)
