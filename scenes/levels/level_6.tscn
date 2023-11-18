@@ -24,7 +24,6 @@ position = Vector2(290, 547)
 [node name="Stick2" parent="." index="6" instance=ExtResource("2_06ji5")]
 position = Vector2(759, 52)
 rotation = -1.48796
-scale = Vector2(1, 1)
 max_contacts_reported = 5
 contact_monitor = true
 
@@ -38,7 +37,6 @@ not_draggable_area = NodePath("../../NotDraggableArea")
 [node name="Stick3" parent="." index="7" instance=ExtResource("2_06ji5")]
 position = Vector2(778, 53)
 rotation = -1.48796
-scale = Vector2(1, 1)
 max_contacts_reported = 5
 contact_monitor = true
 
@@ -52,7 +50,6 @@ not_draggable_area = NodePath("../../NotDraggableArea")
 [node name="Stick4" parent="." index="8" instance=ExtResource("2_06ji5")]
 position = Vector2(795, 53)
 rotation = -1.48796
-scale = Vector2(1, 1)
 max_contacts_reported = 5
 contact_monitor = true
 
@@ -66,7 +63,6 @@ not_draggable_area = NodePath("../../NotDraggableArea")
 [node name="Stick5" parent="." index="9" instance=ExtResource("2_06ji5")]
 position = Vector2(815, 55)
 rotation = -1.48796
-scale = Vector2(1, 1)
 max_contacts_reported = 5
 contact_monitor = true
 

@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://du8c2bhc3nl8"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_0cdf3"]
-[ext_resource type="PackedScene" uid="uid://bdi15xaic7ynh" path="res://scenes/levels/level_6.tscn" id="2_3omy2"]
+[ext_resource type="PackedScene" uid="uid://llivulonyhm6" path="res://scenes/levels/level_7.tscn" id="2_asyaj"]
 [ext_resource type="Script" path="res://scripts/ui.gd" id="2_di1ye"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0cdf3")
-levels = Array[PackedScene]([ExtResource("2_3omy2")])
+levels = Array[PackedScene]([ExtResource("2_asyaj")])
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("2_di1ye")

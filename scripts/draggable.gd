@@ -21,6 +21,7 @@ func _ready() -> void:
 	parent.input_event.connect(_on_input_event)
 
 	parent.input_pickable = true
+	parent.freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC
 
 	warning_icon.texture = warning_icon_texture
 	add_child(warning_icon)

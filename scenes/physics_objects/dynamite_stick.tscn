@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://wvgl1o7alnl"]
+
+[ext_resource type="Texture2D" uid="uid://bf6nwq1kv2dxc" path="res://textures/dynamite_stick.png" id="1_xvrgd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mitd1"]
+height = 52.0
+
+[node name="DynamiteStick" type="RigidBody2D"]
+mass = 0.25
+
+[node name="DynamiteStick" type="Sprite2D" parent="."]
+texture = ExtResource("1_xvrgd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_mitd1")
