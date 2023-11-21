@@ -1,11 +1,6 @@
 class_name UI
 extends CanvasLayer
 
-enum UIState {
-	START_SCREEN,
-	IN_GAME,
-}
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -15,8 +10,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
-func set_ui_state(state: UIState) -> void:
-	for child in get_children():
+func set_screen(screen_name: String) -> void:
+	for child in $Screens.get_children():
 		if child.has_method("hide"):
 			child.hide()
-	get_child(state).show()
+	get_node("Screens/" + screen_name).show()

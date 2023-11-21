@@ -1,17 +1,51 @@
-[gd_scene load_steps=4 format=3 uid="uid://du8c2bhc3nl8"]
+[gd_scene load_steps=23 format=3 uid="uid://du8c2bhc3nl8"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_0cdf3"]
 [ext_resource type="PackedScene" uid="uid://llivulonyhm6" path="res://scenes/levels/level_7.tscn" id="2_asyaj"]
 [ext_resource type="Script" path="res://scripts/ui.gd" id="2_di1ye"]
+[ext_resource type="PackedScene" uid="uid://fh8w31s4bgjn" path="res://scenes/levels/level_1.tscn" id="2_ieaei"]
+[ext_resource type="PackedScene" uid="uid://cww8e2b31nv2x" path="res://scenes/levels/level_2.tscn" id="3_kgg8q"]
+[ext_resource type="PackedScene" uid="uid://bd6d1ilhqg74y" path="res://scenes/levels/level_3.tscn" id="4_ljw4s"]
+[ext_resource type="Script" path="res://scripts/level_select.gd" id="4_qing3"]
+[ext_resource type="PackedScene" uid="uid://bf7tcgi6m7s8r" path="res://scenes/levels/level_4.tscn" id="5_35wm4"]
+[ext_resource type="PackedScene" uid="uid://b54yk4gqj7i84" path="res://scenes/levels/level_5.tscn" id="6_4eh4t"]
+[ext_resource type="PackedScene" uid="uid://bdi15xaic7ynh" path="res://scenes/levels/level_6.tscn" id="7_kgrfh"]
+[ext_resource type="PackedScene" uid="uid://do1dau3njtjou" path="res://scenes/level_button.tscn" id="11_41ea5"]
+[ext_resource type="Texture2D" uid="uid://drdsw6uok2ke7" path="res://textures/check.png" id="12_uko0l"]
+[ext_resource type="Texture2D" uid="uid://coi184bko6rms" path="res://textures/restart_button.png" id="13_5xudb"]
+[ext_resource type="Texture2D" uid="uid://daykl8iq3c05e" path="res://textures/next_button.png" id="13_ekdc5"]
+[ext_resource type="Texture2D" uid="uid://dgqaj1i5bk1ju" path="res://textures/go_button.png" id="14_6ywug"]
+[ext_resource type="Texture2D" uid="uid://lrauoqjqlusc" path="res://textures/home_button.png" id="16_u16d0"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_q3nvq"]
+action = &"reset"
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_4bjw6"]
+events = [SubResource("InputEventAction_q3nvq")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_lme5s"]
+action = &"go"
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_32ijw"]
+events = [SubResource("InputEventAction_lme5s")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_kl7mj"]
+action = &"home"
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_tnqsh"]
+events = [SubResource("InputEventAction_kl7mj")]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0cdf3")
-levels = Array[PackedScene]([ExtResource("2_asyaj")])
+levels = Array[PackedScene]([ExtResource("2_ieaei"), ExtResource("3_kgg8q"), ExtResource("4_ljw4s"), ExtResource("5_35wm4"), ExtResource("6_4eh4t"), ExtResource("7_kgrfh"), ExtResource("2_asyaj")])
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("2_di1ye")
 
-[node name="Control" type="Control" parent="UI"]
+[node name="Screens" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,22 +54,157 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control"]
+[node name="Menu" type="Control" parent="UI/Screens"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI/Screens/Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Screens/Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -89.0
+offset_top = -38.0
+offset_right = 89.0
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayButton" type="Button" parent="UI/Screens/Menu/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 48
+text = "Play"
+
+[node name="LevelSelectButton" type="Button" parent="UI/Screens/Menu/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 48
+text = "Level Select
+"
+
+[node name="OptionsButton" type="Button" parent="UI/Screens/Menu/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 48
+text = "Options"
+
+[node name="LevelSelect" type="Control" parent="UI/Screens"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI/Screens/LevelSelect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelButtons" type="GridContainer" parent="UI/Screens/LevelSelect" node_paths=PackedStringArray("main")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 4
+script = ExtResource("4_qing3")
+total_levels = 7
+button_scene = ExtResource("11_41ea5")
+completion_icon = ExtResource("12_uko0l")
+main = NodePath("../../../..")
+
+[node name="InGame" type="Control" parent="UI/Screens"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Screens/InGame"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 40.0
+offset_left = -167.0
+offset_bottom = 69.0
 grow_horizontal = 0
 
-[node name="ResetButton" type="Button" parent="UI/Control/HBoxContainer"]
+[node name="NextButton" type="Button" parent="UI/Screens/InGame/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-text = "Reset"
+focus_mode = 0
+icon = ExtResource("13_ekdc5")
+flat = true
 
-[node name="GoButton" type="Button" parent="UI/Control/HBoxContainer"]
+[node name="ResetButton" type="Button" parent="UI/Screens/InGame/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-text = "Go"
+focus_mode = 0
+shortcut = SubResource("Shortcut_4bjw6")
+icon = ExtResource("13_5xudb")
+flat = true
 
-[connection signal="pressed" from="UI/Control/HBoxContainer/ResetButton" to="." method="load_level" binds= [0]]
-[connection signal="pressed" from="UI/Control/HBoxContainer/GoButton" to="." method="_on_go_button_pressed"]
+[node name="GoButton" type="Button" parent="UI/Screens/InGame/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_32ijw")
+icon = ExtResource("14_6ywug")
+flat = true
+
+[node name="HomeButton" type="Button" parent="UI/Screens/InGame/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_tnqsh")
+icon = ExtResource("16_u16d0")
+flat = true
+
+[connection signal="level_completed" from="." to="UI/Screens/InGame/HBoxContainer/NextButton" method="show"]
+[connection signal="pressed" from="UI/Screens/Menu/VBoxContainer/LevelSelectButton" to="UI" method="set_screen" binds= ["LevelSelect"]]
+[connection signal="visibility_changed" from="UI/Screens/LevelSelect/LevelButtons" to="UI/Screens/LevelSelect/LevelButtons" method="_on_visibility_changed"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/NextButton" to="UI/Screens/InGame/HBoxContainer/ResetButton" method="hide"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/NextButton" to="UI/Screens/InGame/HBoxContainer/GoButton" method="show"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/NextButton" to="UI/Screens/InGame/HBoxContainer/NextButton" method="hide"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/ResetButton" to="." method="load_level"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/ResetButton" to="UI/Screens/InGame/HBoxContainer/ResetButton" method="hide"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/ResetButton" to="UI/Screens/InGame/HBoxContainer/GoButton" method="show"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/GoButton" to="." method="_on_go_button_pressed"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/GoButton" to="UI/Screens/InGame/HBoxContainer/ResetButton" method="show"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/GoButton" to="UI/Screens/InGame/HBoxContainer/GoButton" method="hide"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="UI/Screens/InGame/HBoxContainer/ResetButton" method="hide"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="UI/Screens/InGame/HBoxContainer/GoButton" method="show"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="UI" method="set_screen" binds= ["Menu"]]
