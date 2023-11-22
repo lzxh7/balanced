@@ -2,7 +2,6 @@
 
 [node name="Button" type="Button"]
 custom_minimum_size = Vector2(100, 100)
-anchors_preset = -1
 offset_right = 30.0
 offset_bottom = 25.0
 focus_mode = 0

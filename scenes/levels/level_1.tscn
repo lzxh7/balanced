@@ -7,23 +7,11 @@
 
 [node name="Level" instance=ExtResource("1_nmrfn")]
 
-[node name="Background" parent="." index="0"]
+[node name="Background" parent="." index="1"]
 texture = ExtResource("2_v6q7h")
 
 [node name="CollisionPolygon2D" parent="NotDraggableArea" index="0"]
 polygon = PackedVector2Array(5, 142, 1160, 153, 1162, 663, -47, 656)
-
-[node name="Scale" parent="." index="3"]
-position = Vector2(593, 415)
-
-[node name="Pivot" parent="Scale" index="1"]
-rotation = -5.32911
-
-[node name="Pan1" parent="Scale/Pivot" index="1"]
-rotation = 5.32911
-
-[node name="Pan2" parent="Scale/Pivot" index="2"]
-rotation = 5.32911
 
 [node name="Box" parent="." index="4" instance=ExtResource("3_4lu2o")]
 position = Vector2(676, 539)
@@ -36,3 +24,15 @@ rotation = 1.68467
 [node name="Draggable" type="Node" parent="Box2" index="2" node_paths=PackedStringArray("not_draggable_area")]
 script = ExtResource("4_28ig7")
 not_draggable_area = NodePath("../../NotDraggableArea")
+
+[node name="Scale" parent="." index="6"]
+position = Vector2(593, 415)
+
+[node name="Pivot" parent="Scale" index="1"]
+rotation = -5.32911
+
+[node name="Pan1" parent="Scale/Pivot" index="1"]
+rotation = 5.32911
+
+[node name="Pan2" parent="Scale/Pivot" index="2"]
+rotation = 5.32911

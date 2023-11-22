@@ -6,6 +6,7 @@ const DEFAULT_SAVE := {
 	"level_completion": 0,
 	"sfx_volume": 1.0,
 	"music_volume": 1.0,
+	"america_mode": false,
 }
 
 static var data: Dictionary:

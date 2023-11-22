@@ -7,6 +7,7 @@ extends Node2D
 		frozen = value
 		_set_recursive("freeze", value, self)
 @export var level_completed_path: NodePath
+@export var mass_inspected_path: NodePath
 @export var not_draggable_area: Area2D
 
 var can_start: bool:
@@ -22,6 +23,11 @@ var level_completed: Signal:
 		assert(node != null and node.has_signal("level_completed"))
 		return get_node(level_completed_path).level_completed
 
+var mass_inspected: Signal:
+	get:
+		var node = get_node_or_null(mass_inspected_path)
+		assert(node != null and node.has_signal("mass_inspected"))
+		return get_node(mass_inspected_path).mass_inspected
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

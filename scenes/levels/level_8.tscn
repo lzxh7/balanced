@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqykpgp5yeg64"]
+
+[ext_resource type="PackedScene" uid="uid://e6k73407y8gg" path="res://scenes/base_level.tscn" id="1_m5a7p"]
+[ext_resource type="Texture2D" uid="uid://bmr1o0kgs4v1y" path="res://textures/level_7_background.png" id="2_e75jm"]
+[ext_resource type="PackedScene" uid="uid://wvgl1o7alnl" path="res://scenes/physics_objects/dynamite_stick.tscn" id="4_ennte"]
+[ext_resource type="Script" path="res://scripts/draggable.gd" id="5_c7qe8"]
+[ext_resource type="PackedScene" uid="uid://bkuxl7voktcvf" path="res://scenes/explosive.tscn" id="6_fl61k"]
+[ext_resource type="PackedScene" uid="uid://bynkebya44ssj" path="res://scenes/physics_objects/small_box.tscn" id="6_uwp8d"]
+
+[node name="Level" instance=ExtResource("1_m5a7p")]
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_e75jm")
+
+[node name="CollisionPolygon2D" parent="Ground" index="0"]
+polygon = PackedVector2Array(-4, 645, 193, 648, 198, 557, 228, 557, 228, 634, 234, 645, 332, 646, 368, 639, 388, 640, 417, 644, 545, 643, 671, 640, 710, 634, 742, 631, 770, 629, 863, 627, 881, 632, 927, 631, 941, 633, 1022, 632, 1041, 635, 1158, 634, 1159, 697, -2, 698)
+
+[node name="CollisionPolygon2D" parent="NotDraggableArea" index="0"]
+polygon = PackedVector2Array(-27, 141, 442, 145, 448, -9, 1167, -9, 1172, 680, -41, 683)
+
+[node name="DynamiteStick" parent="." index="4" instance=ExtResource("4_ennte")]
+position = Vector2(298, 76)
+freeze = true
+
+[node name="Draggable" type="Node" parent="DynamiteStick" index="2" node_paths=PackedStringArray("not_draggable_area")]
+script = ExtResource("5_c7qe8")
+not_draggable_area = NodePath("../../NotDraggableArea")
+
+[node name="Explosive" parent="DynamiteStick" index="3" instance=ExtResource("6_fl61k")]
+explosiveness = 4e+06
+
+[node name="Scale" parent="." index="5"]
+position = Vector2(606, 433)
+
+[node name="Pivot" parent="Scale" index="1"]
+rotation = 0.889725
+
+[node name="Pan1" parent="Scale/Pivot" index="1"]
+rotation = -0.889725
+
+[node name="Pan2" parent="Scale/Pivot" index="2"]
+rotation = -0.889725
+
+[node name="SmallBox" parent="." index="6" instance=ExtResource("6_uwp8d")]
+position = Vector2(211, 493)
+
+[node name="SmallBox2" parent="." index="7" instance=ExtResource("6_uwp8d")]
+position = Vector2(701, 561)

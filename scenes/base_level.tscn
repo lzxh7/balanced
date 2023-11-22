@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://e6k73407y8gg"]
+[gd_scene load_steps=13 format=3 uid="uid://e6k73407y8gg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_0h6hh"]
+[ext_resource type="Script" path="res://scripts/inspect_mass.gd" id="2_dxdq3"]
 [ext_resource type="Texture2D" uid="uid://upepg4svnlyi" path="res://textures/background_1.png" id="2_rloyg"]
 [ext_resource type="Texture2D" uid="uid://bm6l36lieic2e" path="res://textures/scale_stand.png" id="3_44n8q"]
 [ext_resource type="Script" path="res://scripts/pivot.gd" id="4_g30py"]
@@ -26,7 +27,13 @@ height = 98.0078
 script = ExtResource("1_0h6hh")
 frozen = true
 level_completed_path = NodePath("Scale/Pivot/ScalePivot")
+mass_inspected_path = NodePath("InspectMass")
 not_draggable_area = NodePath("NotDraggableArea")
+
+[node name="InspectMass" type="RayCast2D" parent="."]
+target_position = Vector2(0, 1)
+hit_from_inside = true
+script = ExtResource("2_dxdq3")
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("2_rloyg")

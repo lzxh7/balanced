@@ -14,13 +14,20 @@ size = Vector2(75.5373, 63.72)
 
 [node name="Level" instance=ExtResource("1_r7l0r")]
 
-[node name="Background" parent="." index="0"]
+[node name="Background" parent="." index="1"]
 texture = ExtResource("2_yka1i")
 
 [node name="CollisionPolygon2D" parent="NotDraggableArea" index="0"]
 polygon = PackedVector2Array(5, 142, 1160, 153, 1162, 663, -47, 656)
 
-[node name="Scale" parent="." index="3"]
+[node name="Box" parent="." index="4" instance=ExtResource("6_nj6nc")]
+position = Vector2(72, 69)
+
+[node name="Draggable" type="Node" parent="Box" index="2" node_paths=PackedStringArray("not_draggable_area")]
+script = ExtResource("5_f48f7")
+not_draggable_area = NodePath("../../NotDraggableArea")
+
+[node name="Scale" parent="." index="5"]
 position = Vector2(451, 418)
 
 [node name="Pivot" parent="Scale" index="1"]
@@ -51,10 +58,3 @@ shape = SubResource("RectangleShape2D_pww7y")
 [node name="CollisionShape2D2" parent="Scale/Pivot/Pan2" index="4"]
 visible = false
 disabled = true
-
-[node name="Box" parent="." index="4" instance=ExtResource("6_nj6nc")]
-position = Vector2(72, 69)
-
-[node name="Draggable" type="Node" parent="Box" index="2" node_paths=PackedStringArray("not_draggable_area")]
-script = ExtResource("5_f48f7")
-not_draggable_area = NodePath("../../NotDraggableArea")

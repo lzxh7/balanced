@@ -1,6 +1,6 @@
 extends GridContainer
 
-@export var total_levels: int
+var total_levels: int
 @export var button_scene: PackedScene
 @export var completion_icon: Texture2D
 @export var main: Main
@@ -9,6 +9,7 @@ var buttons: Array[Button]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	total_levels = main.levels.size()
 	add_children()
 
 
