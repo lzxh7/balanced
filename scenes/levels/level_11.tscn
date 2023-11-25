@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://olmnbihftv88"]
+
+[ext_resource type="PackedScene" uid="uid://e6k73407y8gg" path="res://scenes/base_level.tscn" id="1_kebf0"]
+[ext_resource type="PackedScene" uid="uid://oegake7ajcp7" path="res://scenes/physics_objects/stick.tscn" id="2_6e2ld"]
+[ext_resource type="Script" path="res://scripts/spawner.gd" id="2_p735g"]
+[ext_resource type="Texture2D" uid="uid://cat32vry3vx8c" path="res://textures/backgrounds/level_11_background.png" id="2_vd4hq"]
+[ext_resource type="PackedScene" uid="uid://dxxrx6gjskrkw" path="res://scenes/physics_objects/small_ball.tscn" id="3_4s85r"]
+[ext_resource type="Script" path="res://scripts/sticky.gd" id="3_n4pru"]
+[ext_resource type="Script" path="res://scripts/draggable.gd" id="4_mncpw"]
+
+[node name="Level" instance=ExtResource("1_kebf0")]
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_vd4hq")
+
+[node name="CollisionPolygon2D" parent="Ground" index="0"]
+polygon = PackedVector2Array(-4, 195, 38, 241, 159, 377, 179, 408, 375, 600, 414, 645, 437, 671, 474, 693, -35, 717)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Ground" index="1"]
+position = Vector2(0, -78)
+polygon = PackedVector2Array(1185, 318, 1055, 361, 991, 409, 919, 474, 911, 490, 819, 591, 661, 639, 540, 736, 1202, 742)
+
+[node name="CollisionPolygon2D" parent="NotDraggableArea" index="0"]
+polygon = PackedVector2Array(572, 626, 319, 366, -40, -27, 1203, -21, 1220, 686, 623, 673)
+
+[node name="Stick" parent="." index="5" instance=ExtResource("2_6e2ld")]
+position = Vector2(19, 110)
+rotation = 1.60494
+max_contacts_reported = 5
+contact_monitor = true
+
+[node name="Sticky" type="Node" parent="Stick" index="2"]
+script = ExtResource("3_n4pru")
+
+[node name="Draggable" type="Node" parent="Stick" index="3" node_paths=PackedStringArray("not_draggable_area")]
+script = ExtResource("4_mncpw")
+not_draggable_area = NodePath("../../NotDraggableArea")
+
+[node name="Spawner" type="Node2D" parent="." index="6"]
+position = Vector2(31, -64)
+script = ExtResource("2_p735g")
+delay = 0.5
+scenes = Array[PackedScene]([ExtResource("3_4s85r")])
+freeze = true
+
+[node name="Scale" parent="." index="7"]
+position = Vector2(717, 373)
+rotation = -0.800111
+
+[node name="Pivot" parent="Scale" index="1"]
+rotation = 0.799361

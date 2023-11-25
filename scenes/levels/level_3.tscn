@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bd6d1ilhqg74y"]
 
 [ext_resource type="PackedScene" uid="uid://e6k73407y8gg" path="res://scenes/base_level.tscn" id="1_foepl"]
-[ext_resource type="Texture2D" uid="uid://b7xt62dymc68r" path="res://textures/level_1_background.png" id="2_qs3sg"]
+[ext_resource type="Texture2D" uid="uid://b7xt62dymc68r" path="res://textures/backgrounds/level_1_background.png" id="2_6fb0x"]
 [ext_resource type="Texture2D" uid="uid://dgvqrdxep5m8n" path="res://textures/hanging_mass.png" id="2_ur8ey"]
 [ext_resource type="PackedScene" uid="uid://bynkebya44ssj" path="res://scenes/physics_objects/small_box.tscn" id="4_nt0nu"]
 [ext_resource type="PackedScene" uid="uid://6rdn0anr74tq" path="res://scenes/physics_objects/box.tscn" id="5_3bnw3"]
@@ -16,7 +16,7 @@ size = Vector2(20.6053, 20.3826)
 [node name="Level" instance=ExtResource("1_foepl")]
 
 [node name="Background" parent="." index="1"]
-texture = ExtResource("2_qs3sg")
+texture = ExtResource("2_6fb0x")
 
 [node name="CollisionPolygon2D" parent="NotDraggableArea" index="0"]
 polygon = PackedVector2Array(5, 142, 1160, 153, 1162, 663, -47, 656)

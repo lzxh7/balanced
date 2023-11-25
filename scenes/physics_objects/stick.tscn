@@ -9,7 +9,6 @@ height = 76.0256
 [node name="Stick" type="RigidBody2D"]
 mass = 0.25
 continuous_cd = 2
-freeze = true
 freeze_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

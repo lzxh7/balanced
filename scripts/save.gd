@@ -7,6 +7,7 @@ const DEFAULT_SAVE := {
 	"sfx_volume": 1.0,
 	"music_volume": 1.0,
 	"america_mode": false,
+	"seen_win_screen": false,
 }
 
 static var data: Dictionary:

@@ -18,7 +18,7 @@ func _process(_delta: float) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	if abs(global_rotation - target_angle) > target_range:
+	if abs(global_rotation - $"../..".rotation - target_angle) > target_range:
 		timer = 0
 	else:
 		timer += delta

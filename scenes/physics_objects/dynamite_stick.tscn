@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://bf6nwq1kv2dxc" path="res://textures/dynamite_stick.png" id="1_xvrgd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mitd1"]
-radius = 16.1196
-height = 74.4288
+radius = 10.0405
+height = 54.0074
 
 [node name="DynamiteStick" type="RigidBody2D"]
 
@@ -12,6 +12,6 @@ height = 74.4288
 texture = ExtResource("1_xvrgd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 15)
-rotation = -0.0721526
+position = Vector2(0, 6)
+rotation = -0.00389084
 shape = SubResource("CapsuleShape2D_mitd1")

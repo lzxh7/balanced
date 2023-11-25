@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://du8c2bhc3nl8"]
+[gd_scene load_steps=36 format=3 uid="uid://du8c2bhc3nl8"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_0cdf3"]
 [ext_resource type="PackedScene" uid="uid://llivulonyhm6" path="res://scenes/levels/level_7.tscn" id="2_asyaj"]
@@ -11,14 +11,20 @@
 [ext_resource type="PackedScene" uid="uid://b54yk4gqj7i84" path="res://scenes/levels/level_5.tscn" id="6_4eh4t"]
 [ext_resource type="PackedScene" uid="uid://bdi15xaic7ynh" path="res://scenes/levels/level_6.tscn" id="7_kgrfh"]
 [ext_resource type="PackedScene" uid="uid://cqykpgp5yeg64" path="res://scenes/levels/level_8.tscn" id="9_rt7lx"]
+[ext_resource type="PackedScene" uid="uid://q8j03makqo72" path="res://scenes/levels/level_9.tscn" id="10_uatos"]
 [ext_resource type="PackedScene" uid="uid://do1dau3njtjou" path="res://scenes/level_button.tscn" id="11_41ea5"]
-[ext_resource type="Texture2D" uid="uid://drdsw6uok2ke7" path="res://textures/check.png" id="12_uko0l"]
-[ext_resource type="Texture2D" uid="uid://coi184bko6rms" path="res://textures/restart_button.png" id="13_5xudb"]
-[ext_resource type="Texture2D" uid="uid://cmmso5nx22b4v" path="res://textures/back_button.png" id="13_683ru"]
-[ext_resource type="Texture2D" uid="uid://daykl8iq3c05e" path="res://textures/next_button.png" id="13_ekdc5"]
-[ext_resource type="Texture2D" uid="uid://dgqaj1i5bk1ju" path="res://textures/go_button.png" id="14_6ywug"]
+[ext_resource type="PackedScene" uid="uid://jxhse17yc3ng" path="res://scenes/levels/level_10.tscn" id="11_taki0"]
+[ext_resource type="Texture2D" uid="uid://cmmso5nx22b4v" path="res://textures/ui/back_button.png" id="12_aa048"]
+[ext_resource type="PackedScene" uid="uid://olmnbihftv88" path="res://scenes/levels/level_11.tscn" id="12_w75jh"]
+[ext_resource type="PackedScene" uid="uid://f423o5d0cqgg" path="res://scenes/title.tscn" id="14_po2h6"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="14_ueq3a"]
+[ext_resource type="Texture2D" uid="uid://drdsw6uok2ke7" path="res://textures/ui/check.png" id="15_cmqnl"]
+[ext_resource type="Texture2D" uid="uid://daykl8iq3c05e" path="res://textures/ui/next_button.png" id="16_4i6fg"]
 [ext_resource type="Texture2D" uid="uid://lrauoqjqlusc" path="res://textures/home_button.png" id="16_u16d0"]
+[ext_resource type="Texture2D" uid="uid://coi184bko6rms" path="res://textures/ui/restart_button.png" id="17_5vxww"]
 [ext_resource type="Script" path="res://scripts/mass_label.gd" id="17_eji01"]
+[ext_resource type="Texture2D" uid="uid://dgqaj1i5bk1ju" path="res://textures/ui/go_button.png" id="18_tucju"]
+[ext_resource type="Script" path="res://scripts/deny_button.gd" id="23_rw8ak"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_lm4fk"]
 action = &"home"
@@ -60,7 +66,7 @@ texture_margin_bottom = 12.0
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0cdf3")
-levels = Array[PackedScene]([ExtResource("2_ieaei"), ExtResource("3_kgg8q"), ExtResource("4_ljw4s"), ExtResource("5_35wm4"), ExtResource("6_4eh4t"), ExtResource("7_kgrfh"), ExtResource("9_rt7lx"), ExtResource("2_asyaj")])
+levels = Array[PackedScene]([ExtResource("2_ieaei"), ExtResource("3_kgg8q"), ExtResource("4_ljw4s"), ExtResource("5_35wm4"), ExtResource("6_4eh4t"), ExtResource("7_kgrfh"), ExtResource("9_rt7lx"), ExtResource("2_asyaj"), ExtResource("10_uatos"), ExtResource("11_taki0"), ExtResource("12_w75jh")])
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("2_di1ye")
@@ -81,6 +87,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("14_ueq3a")
+title_scene = ExtResource("14_po2h6")
 
 [node name="ColorRect" type="ColorRect" parent="UI/Screens/Menu"]
 layout_mode = 1
@@ -164,6 +172,7 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+focus_mode = 0
 
 [node name="Label2" type="Label" parent="UI/Screens/Options/GridContainer"]
 layout_mode = 2
@@ -174,6 +183,7 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+focus_mode = 0
 
 [node name="Label3" type="Label" parent="UI/Screens/Options/GridContainer"]
 layout_mode = 2
@@ -182,6 +192,7 @@ text = "Imperial Mass: "
 [node name="ImperialMassCheck" type="CheckBox" parent="UI/Screens/Options/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 4
+focus_mode = 0
 flat = true
 
 [node name="BackButton" type="Button" parent="UI/Screens/Options"]
@@ -190,7 +201,7 @@ offset_right = 30.0
 offset_bottom = 25.0
 focus_mode = 0
 shortcut = SubResource("Shortcut_nfpvf")
-icon = ExtResource("13_683ru")
+icon = ExtResource("12_aa048")
 flat = true
 
 [node name="LevelSelect" type="Control" parent="UI/Screens"]
@@ -226,7 +237,7 @@ grow_vertical = 2
 columns = 4
 script = ExtResource("4_qing3")
 button_scene = ExtResource("11_41ea5")
-completion_icon = ExtResource("12_uko0l")
+completion_icon = ExtResource("15_cmqnl")
 main = NodePath("../../../..")
 
 [node name="BackButton" type="Button" parent="UI/Screens/LevelSelect"]
@@ -235,7 +246,7 @@ offset_right = 30.0
 offset_bottom = 25.0
 focus_mode = 0
 shortcut = SubResource("Shortcut_nfpvf")
-icon = ExtResource("13_683ru")
+icon = ExtResource("12_aa048")
 flat = true
 
 [node name="InGame" type="Control" parent="UI/Screens"]
@@ -262,7 +273,7 @@ visible = false
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
-icon = ExtResource("13_ekdc5")
+icon = ExtResource("16_4i6fg")
 flat = true
 
 [node name="ResetButton" type="Button" parent="UI/Screens/InGame/HBoxContainer"]
@@ -271,7 +282,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
 shortcut = SubResource("Shortcut_4bjw6")
-icon = ExtResource("13_5xudb")
+icon = ExtResource("17_5vxww")
 flat = true
 
 [node name="GoButton" type="Button" parent="UI/Screens/InGame/HBoxContainer"]
@@ -279,7 +290,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
 shortcut = SubResource("Shortcut_32ijw")
-icon = ExtResource("14_6ywug")
+icon = ExtResource("18_tucju")
 flat = true
 
 [node name="HomeButton" type="Button" parent="UI/Screens/InGame/HBoxContainer"]
@@ -305,11 +316,63 @@ grow_vertical = 0
 theme_override_styles/normal = SubResource("StyleBoxTexture_ftudm")
 script = ExtResource("17_eji01")
 
+[node name="Win" type="Control" parent="UI/Screens"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI/Screens/Win"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Screens/Win"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -89.0
+offset_right = 78.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/Screens/Win/VBoxContainer"]
+layout_mode = 2
+text = "You win."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="AcceptButton" type="Button" parent="UI/Screens/Win/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Accept"
+
+[node name="DenyButton" type="Button" parent="UI/Screens/Win/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Deny"
+script = ExtResource("23_rw8ak")
+
 [connection signal="level_completed" from="." to="UI/Screens/InGame/HBoxContainer/NextButton" method="show"]
+[connection signal="visibility_changed" from="UI/Screens/Menu" to="UI/Screens/Menu" method="_on_visibility_changed"]
 [connection signal="pressed" from="UI/Screens/Menu/VBoxContainer/PlayButton" to="." method="next_level" binds= [true]]
 [connection signal="pressed" from="UI/Screens/Menu/VBoxContainer/PlayButton" to="UI" method="set_screen" binds= ["InGame"]]
 [connection signal="pressed" from="UI/Screens/Menu/VBoxContainer/LevelSelectButton" to="UI" method="set_screen" binds= ["LevelSelect"]]
 [connection signal="pressed" from="UI/Screens/Menu/VBoxContainer/OptionsButton" to="UI" method="set_screen" binds= ["Options"]]
+[connection signal="value_changed" from="UI/Screens/Options/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="UI/Screens/Options/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="toggled" from="UI/Screens/Options/GridContainer/ImperialMassCheck" to="." method="_on_imperial_mass_check_toggled"]
 [connection signal="pressed" from="UI/Screens/Options/BackButton" to="UI" method="set_screen" binds= ["Menu"]]
 [connection signal="visibility_changed" from="UI/Screens/LevelSelect/LevelButtons" to="UI/Screens/LevelSelect/LevelButtons" method="_on_visibility_changed"]
 [connection signal="pressed" from="UI/Screens/LevelSelect/BackButton" to="UI" method="set_screen" binds= ["Menu"]]
@@ -321,8 +384,11 @@ script = ExtResource("17_eji01")
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/ResetButton" to="UI/Screens/InGame/HBoxContainer/ResetButton" method="hide"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/ResetButton" to="UI/Screens/InGame/HBoxContainer/GoButton" method="show"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/GoButton" to="." method="_on_go_button_pressed"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="." method="clear_level"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="UI/Screens/InGame/HBoxContainer/NextButton" method="hide"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="UI/Screens/InGame/HBoxContainer/ResetButton" method="hide"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="UI/Screens/InGame/HBoxContainer/GoButton" method="show"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="UI" method="set_screen" binds= ["Menu"]]
 [connection signal="visibility_changed" from="UI/Screens/InGame/MassLabel" to="UI/Screens/InGame/MassLabel" method="_on_visibility_changed"]
+[connection signal="pressed" from="UI/Screens/Win/VBoxContainer/AcceptButton" to="UI" method="set_screen" binds= ["Menu"]]
+[connection signal="pressed" from="UI/Screens/Win/VBoxContainer/DenyButton" to="UI/Screens/Win/VBoxContainer/DenyButton" method="_on_pressed"]

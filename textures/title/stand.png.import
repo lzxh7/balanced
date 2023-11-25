@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmmso5nx22b4v"
-path="res://.godot/imported/back_button.png-bc9d7f1763c714c17cd362b41e0aba18.ctex"
+uid="uid://4068ffl2xnd"
+path="res://.godot/imported/stand.png-7c5226fcdf1750bdac65e84c968e1be4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/back_button.png"
-dest_files=["res://.godot/imported/back_button.png-bc9d7f1763c714c17cd362b41e0aba18.ctex"]
+source_file="res://textures/title/stand.png"
+dest_files=["res://.godot/imported/stand.png-7c5226fcdf1750bdac65e84c968e1be4.ctex"]
 
 [params]
 

@@ -3,9 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cqqoy1fphqlwo" path="res://icon.svg" id="1_1edl6"]
 
 [node name="RigidBody2D" type="RigidBody2D"]
-position = Vector2(91, 95)
 input_pickable = true
-freeze = true
 freeze_mode = 1
 
 [node name="Icon" type="Sprite2D" parent="."]

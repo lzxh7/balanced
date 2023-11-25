@@ -8,6 +8,7 @@ size = Vector2(38.7343, 41.1832)
 
 [node name="SmallBox" instance=ExtResource("1_n5uh3")]
 mass = 0.5
+freeze = false
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_g247f")

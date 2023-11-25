@@ -52,10 +52,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	# freeze should be renamed frozen then this would be more readable
 	if event is InputEventMouseMotion and parent.freeze:
+		event = event as InputEventMouseMotion
 		if dragging:
 			parent.position += event.relative
 		if rotating:
-			parent.rotation += event.relative.x * ROTATION_SENSITIVITY
+			var event_offset: Vector2 = event.position - parent.position
+			parent.rotation += (event_offset - event.relative).angle_to(event_offset)
 
 
 func _physics_process(_delta: float) -> void:
