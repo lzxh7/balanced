@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://wqn23573t04t"]
+
+[ext_resource type="PackedScene" uid="uid://e6k73407y8gg" path="res://scenes/base_level.tscn" id="1_kfr2w"]
+[ext_resource type="Texture2D" uid="uid://b7xt62dymc68r" path="res://textures/backgrounds/level_1_background.png" id="2_ai6wy"]
+[ext_resource type="PackedScene" uid="uid://6rdn0anr74tq" path="res://scenes/physics_objects/box.tscn" id="4_c3n21"]
+[ext_resource type="Script" path="res://scripts/draggable.gd" id="5_ivxd2"]
+[ext_resource type="Texture2D" uid="uid://bxnp71n27hhy2" path="res://textures/large_hanging_mass.png" id="5_jb4ec"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3osjq"]
+size = Vector2(39.709, 52.2088)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pww7y"]
+size = Vector2(75.5373, 63.72)
+
+[node name="Level" instance=ExtResource("1_kfr2w")]
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_ai6wy")
+
+[node name="Box" parent="." index="4" instance=ExtResource("4_c3n21")]
+position = Vector2(72, 69)
+freeze = true
+
+[node name="Draggable" type="Node" parent="Box" index="2" node_paths=PackedStringArray("not_draggable_area")]
+script = ExtResource("5_ivxd2")
+not_draggable_area = NodePath("../../NotDraggableArea")
+
+[node name="Scale" parent="." index="6"]
+position = Vector2(451, 418)
+
+[node name="Pivot" parent="Scale" index="1"]
+rotation = 0.538286
+
+[node name="Pan1" parent="Scale/Pivot" index="1"]
+rotation = -0.538286
+
+[node name="Pan2" parent="Scale/Pivot" index="2"]
+position = Vector2(184, 32)
+rotation = -0.538286
+mass = 2.5
+
+[node name="ScalePan" parent="Scale/Pivot/Pan2" index="0"]
+position = Vector2(12, 80)
+texture = ExtResource("5_jb4ec")
+
+[node name="CollisionShape2D" parent="Scale/Pivot/Pan2" index="2"]
+position = Vector2(12, 83)
+rotation = -0.942773
+shape = SubResource("RectangleShape2D_3osjq")
+
+[node name="CollisionShape2D3" parent="Scale/Pivot/Pan2" index="3"]
+position = Vector2(12.4473, 121.471)
+rotation = -1.58444
+shape = SubResource("RectangleShape2D_pww7y")
+
+[node name="CollisionShape2D2" parent="Scale/Pivot/Pan2" index="4"]
+visible = false
+disabled = true

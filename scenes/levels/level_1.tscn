@@ -16,10 +16,12 @@ polygon = PackedVector2Array(5, 142, 1160, 153, 1162, 663, -47, 656)
 [node name="Box" parent="." index="4" instance=ExtResource("3_4lu2o")]
 position = Vector2(676, 539)
 rotation = 4.77925
+freeze = true
 
 [node name="Box2" parent="." index="5" instance=ExtResource("3_4lu2o")]
 position = Vector2(91, 74)
 rotation = 1.68467
+freeze = true
 
 [node name="Draggable" type="Node" parent="Box2" index="2" node_paths=PackedStringArray("not_draggable_area")]
 script = ExtResource("4_28ig7")

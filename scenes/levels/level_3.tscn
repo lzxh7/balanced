@@ -25,15 +25,17 @@ polygon = PackedVector2Array(5, 142, 1160, 153, 1162, 663, -47, 656)
 position = Vector2(733, 505)
 rotation = -3.33405
 mass = 0.25
+freeze = true
 
 [node name="Box" parent="." index="5" instance=ExtResource("5_3bnw3")]
 position = Vector2(271, 72)
+freeze = true
 
 [node name="Draggable" type="Node" parent="Box" index="2" node_paths=PackedStringArray("not_draggable_area")]
 script = ExtResource("6_18tk6")
 not_draggable_area = NodePath("../../NotDraggableArea")
 
-[node name="Scale" parent="." index="6"]
+[node name="Scale" parent="." index="7"]
 position = Vector2(559, 414)
 
 [node name="Pivot" parent="Scale" index="1"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://du8c2bhc3nl8"]
+[gd_scene load_steps=37 format=3 uid="uid://du8c2bhc3nl8"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_0cdf3"]
 [ext_resource type="PackedScene" uid="uid://llivulonyhm6" path="res://scenes/levels/level_7.tscn" id="2_asyaj"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://jxhse17yc3ng" path="res://scenes/levels/level_10.tscn" id="11_taki0"]
 [ext_resource type="Texture2D" uid="uid://cmmso5nx22b4v" path="res://textures/ui/back_button.png" id="12_aa048"]
 [ext_resource type="PackedScene" uid="uid://olmnbihftv88" path="res://scenes/levels/level_11.tscn" id="12_w75jh"]
+[ext_resource type="PackedScene" uid="uid://cddm4nut6rdxc" path="res://scenes/levels/level_12.tscn" id="13_afn5w"]
 [ext_resource type="PackedScene" uid="uid://f423o5d0cqgg" path="res://scenes/title.tscn" id="14_po2h6"]
 [ext_resource type="Script" path="res://scripts/menu.gd" id="14_ueq3a"]
 [ext_resource type="Texture2D" uid="uid://drdsw6uok2ke7" path="res://textures/ui/check.png" id="15_cmqnl"]
@@ -66,7 +67,7 @@ texture_margin_bottom = 12.0
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0cdf3")
-levels = Array[PackedScene]([ExtResource("2_ieaei"), ExtResource("3_kgg8q"), ExtResource("4_ljw4s"), ExtResource("5_35wm4"), ExtResource("6_4eh4t"), ExtResource("7_kgrfh"), ExtResource("9_rt7lx"), ExtResource("2_asyaj"), ExtResource("10_uatos"), ExtResource("11_taki0"), ExtResource("12_w75jh")])
+levels = Array[PackedScene]([ExtResource("2_ieaei"), ExtResource("3_kgg8q"), ExtResource("4_ljw4s"), ExtResource("5_35wm4"), ExtResource("6_4eh4t"), ExtResource("7_kgrfh"), ExtResource("9_rt7lx"), ExtResource("2_asyaj"), ExtResource("10_uatos"), ExtResource("11_taki0"), ExtResource("12_w75jh"), ExtResource("13_afn5w")])
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("2_di1ye")
@@ -187,12 +188,13 @@ focus_mode = 0
 
 [node name="Label3" type="Label" parent="UI/Screens/Options/GridContainer"]
 layout_mode = 2
-text = "Imperial Mass: "
+text = "Imperial Mass Units: "
 
 [node name="ImperialMassCheck" type="CheckBox" parent="UI/Screens/Options/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 focus_mode = 0
+button_pressed = true
 flat = true
 
 [node name="BackButton" type="Button" parent="UI/Screens/Options"]
@@ -364,7 +366,11 @@ focus_mode = 0
 text = "Deny"
 script = ExtResource("23_rw8ak")
 
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+max_polyphony = 64
+
 [connection signal="level_completed" from="." to="UI/Screens/InGame/HBoxContainer/NextButton" method="show"]
+[connection signal="title_added" from="UI/Screens/Menu" to="." method="set_up_sounds"]
 [connection signal="visibility_changed" from="UI/Screens/Menu" to="UI/Screens/Menu" method="_on_visibility_changed"]
 [connection signal="pressed" from="UI/Screens/Menu/VBoxContainer/PlayButton" to="." method="next_level" binds= [true]]
 [connection signal="pressed" from="UI/Screens/Menu/VBoxContainer/PlayButton" to="UI" method="set_screen" binds= ["InGame"]]

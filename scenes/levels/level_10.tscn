@@ -21,9 +21,11 @@ polygon = PackedVector2Array(-27, 141, 442, 145, 1169, 148, 1172, 680, -41, 683)
 
 [node name="Box" parent="." index="5" instance=ExtResource("3_n3dnt")]
 position = Vector2(207, 481)
+freeze = true
 
 [node name="Box2" parent="." index="6" instance=ExtResource("3_n3dnt")]
 position = Vector2(699, 547)
+freeze = true
 
 [node name="DynamiteStick" parent="." index="7" instance=ExtResource("3_yy4eg")]
 position = Vector2(47, 78)

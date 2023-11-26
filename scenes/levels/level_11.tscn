@@ -28,6 +28,7 @@ position = Vector2(19, 110)
 rotation = 1.60494
 max_contacts_reported = 5
 contact_monitor = true
+freeze = true
 
 [node name="Sticky" type="Node" parent="Stick" index="2"]
 script = ExtResource("3_n4pru")

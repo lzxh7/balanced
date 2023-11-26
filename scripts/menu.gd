@@ -3,6 +3,7 @@ extends Control
 @export var title_scene: PackedScene
 
 var title: Node
+signal title_added(title: Node)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,5 +20,6 @@ func _on_visibility_changed() -> void:
 		title = title_scene.instantiate()
 		add_child(title)
 		move_child(title, 1)
+		title_added.emit(title)
 	else:
 		title.queue_free()

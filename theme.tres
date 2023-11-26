@@ -1,7 +1,11 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://c3jvgp7lnm8jx"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://c3jvgp7lnm8jx"]
 
 [ext_resource type="Texture2D" uid="uid://dr5nf4p78in05" path="res://textures/ui/button.png" id="1_ef4hh"]
 [ext_resource type="Texture2D" uid="uid://d203142ycy3cr" path="res://textures/ui/button_pressed.png" id="2_ohwmj"]
+[ext_resource type="Texture2D" uid="uid://nxprfr4kmnl6" path="res://textures/ui/checked_box.png" id="3_lbgmf"]
+[ext_resource type="Texture2D" uid="uid://cbhqh6ftyyptl" path="res://textures/ui/unchecked_box.png" id="4_kdfdw"]
+[ext_resource type="Texture2D" uid="uid://32v134u52idf" path="res://textures/ui/slider_base.png" id="5_b2xjw"]
+[ext_resource type="Texture2D" uid="uid://dbmxi65v7wk55" path="res://textures/ui/slider_circle.png" id="5_lc125"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w6261"]
 texture = ExtResource("1_ef4hh")
@@ -26,6 +30,15 @@ texture_margin_right = 21.0
 texture_margin_bottom = 15.0
 modulate_color = Color(0.780392, 0.780392, 0.780392, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2xyy4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0lj2q"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5l3lc"]
+texture = ExtResource("5_b2xjw")
+texture_margin_bottom = 9.0
+draw_center = false
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vwdxu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r16n1"]
@@ -41,6 +54,14 @@ Button/styles/focus = SubResource("StyleBoxTexture_w6261")
 Button/styles/hover = SubResource("StyleBoxTexture_6r81v")
 Button/styles/normal = SubResource("StyleBoxTexture_w6261")
 Button/styles/pressed = SubResource("StyleBoxTexture_jl0ie")
+CheckBox/constants/check_v_offset = -6
+CheckBox/icons/checked = ExtResource("3_lbgmf")
+CheckBox/icons/unchecked = ExtResource("4_kdfdw")
+HSlider/icons/grabber = ExtResource("5_lc125")
+HSlider/icons/grabber_highlight = ExtResource("5_lc125")
+HSlider/styles/grabber_area = SubResource("StyleBoxEmpty_2xyy4")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_0lj2q")
+HSlider/styles/slider = SubResource("StyleBoxTexture_5l3lc")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/font_sizes/font_size = 32
 Label/styles/normal = SubResource("StyleBoxEmpty_vwdxu")
