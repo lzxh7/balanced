@@ -26,6 +26,7 @@
 [ext_resource type="Script" path="res://scripts/mass_label.gd" id="17_eji01"]
 [ext_resource type="Texture2D" uid="uid://dgqaj1i5bk1ju" path="res://textures/ui/go_button.png" id="18_tucju"]
 [ext_resource type="Script" path="res://scripts/deny_button.gd" id="23_rw8ak"]
+[ext_resource type="Texture2D" uid="uid://dr5nf4p78in05" path="res://textures/ui/button.png" id="25_ddmly"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_lm4fk"]
 action = &"home"
@@ -55,11 +56,8 @@ pressed = true
 [sub_resource type="Shortcut" id="Shortcut_tnqsh"]
 events = [SubResource("InputEventAction_kl7mj")]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fna07"]
-load_path = "res://.godot/imported/button.png-8f8ade6b23768d1b57a9b2d3aa1611fb.ctex"
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ftudm"]
-texture = SubResource("CompressedTexture2D_fna07")
+texture = ExtResource("25_ddmly")
 texture_margin_left = 11.0
 texture_margin_top = 13.0
 texture_margin_right = 19.0

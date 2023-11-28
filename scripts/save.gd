@@ -26,7 +26,6 @@ static func set_value(key: String, value) -> void:
 static func _static_init() -> void:
 	if not FileAccess.file_exists(SAVE_PATH):
 		data = DEFAULT_SAVE
-
 	for key in DEFAULT_SAVE.keys():
-		if data.find_key(key) == null:
+		if data[key] == null:
 			set_value(key, DEFAULT_SAVE[key])
