@@ -2,9 +2,11 @@ class_name Main
 extends Node
 
 @export var levels: Array[PackedScene]
+@export var ghost_objects_color: Color
 
 @onready var ui: UI = $UI
 
+var ghost_objects: Array[Node]
 var level: Level
 var level_id: int = -1
 
@@ -24,8 +26,6 @@ func _process(_delta: float) -> void:
 func _on_go_button_pressed() -> void:
 	if level.can_start:
 		level.frozen = false
-		$UI/Screens/InGame/HBoxContainer/ResetButton.show()
-		$UI/Screens/InGame/HBoxContainer/GoButton.hide()
 
 
 func _on_level_completed() -> void:
@@ -52,10 +52,7 @@ func _on_imperial_mass_check_toggled(button_pressed: bool) -> void:
 	Save.set_value("america_mode", button_pressed)
 
 
-# -1: reload current level
-func load_level(id: int = -1) -> void:
-	if id == -1:
-		id = level_id
+func load_level(id: int) -> void:
 	level_id = id
 
 	clear_level()
@@ -65,6 +62,25 @@ func load_level(id: int = -1) -> void:
 	level.level_completed.connect(_on_level_completed, CONNECT_ONE_SHOT)
 	level.mass_inspected.connect($UI/Screens/InGame/MassLabel._on_mass_inspected)
 
+
+func reset_level() -> void:
+	load_level(level_id)
+
+
+func create_ghosts() -> void:
+	clear_ghosts()
+	for node in level.get_ghosts():
+		var transform := node.get_global_transform()
+		node = node.duplicate()
+		ghost_objects.append(node)
+		node.modulate = ghost_objects_color
+		add_child(node)
+		node.transform = transform
+
+func clear_ghosts() -> void:
+	for node in ghost_objects:
+		node.queue_free()
+	ghost_objects.clear()
 
 func clear_level() -> void:
 	if level != null:

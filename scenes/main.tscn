@@ -25,8 +25,8 @@
 [ext_resource type="Texture2D" uid="uid://coi184bko6rms" path="res://textures/ui/restart_button.png" id="17_5vxww"]
 [ext_resource type="Script" path="res://scripts/mass_label.gd" id="17_eji01"]
 [ext_resource type="Texture2D" uid="uid://dgqaj1i5bk1ju" path="res://textures/ui/go_button.png" id="18_tucju"]
-[ext_resource type="Script" path="res://scripts/deny_button.gd" id="23_rw8ak"]
 [ext_resource type="Texture2D" uid="uid://dr5nf4p78in05" path="res://textures/ui/button.png" id="25_ddmly"]
+[ext_resource type="Texture2D" uid="uid://bqq1tky7e56si" path="res://textures/ui/winner.png" id="27_6loem"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_lm4fk"]
 action = &"home"
@@ -66,6 +66,7 @@ texture_margin_bottom = 12.0
 [node name="Main" type="Node"]
 script = ExtResource("1_0cdf3")
 levels = Array[PackedScene]([ExtResource("2_ieaei"), ExtResource("3_kgg8q"), ExtResource("4_ljw4s"), ExtResource("5_35wm4"), ExtResource("6_4eh4t"), ExtResource("7_kgrfh"), ExtResource("9_rt7lx"), ExtResource("2_asyaj"), ExtResource("10_uatos"), ExtResource("11_taki0"), ExtResource("12_w75jh"), ExtResource("13_afn5w")])
+ghost_objects_color = Color(1, 1, 1, 0.313726)
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("2_di1ye")
@@ -80,6 +81,7 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="Menu" type="Control" parent="UI/Screens"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -260,6 +262,7 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Screens/InGame"]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -317,7 +320,6 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_ftudm")
 script = ExtResource("17_eji01")
 
 [node name="Win" type="Control" parent="UI/Screens"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -333,36 +335,72 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Screens/Win"]
+[node name="Label" type="Label" parent="UI/Screens/Win"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -68.0
-offset_top = -89.0
-offset_right = 78.0
-offset_bottom = 90.0
+offset_left = -123.5
+offset_top = -116.0
+offset_right = 123.5
+offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Label" type="Label" parent="UI/Screens/Win/VBoxContainer"]
-layout_mode = 2
-text = "You win."
+theme_override_font_sizes/font_size = 48
+text = "You Win!
+Thanks for playing!"
 horizontal_alignment = 1
-autowrap_mode = 2
 
-[node name="AcceptButton" type="Button" parent="UI/Screens/Win/VBoxContainer"]
-layout_mode = 2
-focus_mode = 0
-text = "Accept"
+[node name="Label2" type="Label" parent="UI/Screens/Win"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -257.0
+offset_top = -335.0
+offset_right = -181.0
+offset_bottom = -261.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 36
+text = "you"
+horizontal_alignment = 1
 
-[node name="DenyButton" type="Button" parent="UI/Screens/Win/VBoxContainer"]
-layout_mode = 2
+[node name="AcceptButton" type="Button" parent="UI/Screens/Win"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = 26.0
+offset_right = 48.5
+offset_bottom = 122.0
+grow_horizontal = 2
+grow_vertical = 2
 focus_mode = 0
-text = "Deny"
-script = ExtResource("23_rw8ak")
+theme_override_font_sizes/font_size = 48
+text = "Ok"
+
+[node name="Winner" type="TextureRect" parent="UI/Screens/Win"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -198.0
+offset_top = -373.0
+offset_right = -18.0
+offset_bottom = -17.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("27_6loem")
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 max_polyphony = 64
@@ -384,15 +422,18 @@ max_polyphony = 64
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/NextButton" to="UI/Screens/InGame/HBoxContainer/NextButton" method="hide"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/NextButton" to="UI/Screens/InGame/HBoxContainer/ResetButton" method="hide"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/NextButton" to="UI/Screens/InGame/HBoxContainer/GoButton" method="show"]
-[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/ResetButton" to="." method="load_level"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/ResetButton" to="." method="reset_level"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/ResetButton" to="UI/Screens/InGame/HBoxContainer/ResetButton" method="hide"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/ResetButton" to="UI/Screens/InGame/HBoxContainer/GoButton" method="show"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/GoButton" to="." method="_on_go_button_pressed"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/GoButton" to="." method="create_ghosts"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/GoButton" to="UI/Screens/InGame/HBoxContainer/ResetButton" method="show"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/GoButton" to="UI/Screens/InGame/HBoxContainer/GoButton" method="hide"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="." method="clear_level"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="." method="clear_ghosts"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="UI/Screens/InGame/HBoxContainer/NextButton" method="hide"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="UI/Screens/InGame/HBoxContainer/ResetButton" method="hide"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="UI/Screens/InGame/HBoxContainer/GoButton" method="show"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="UI" method="set_screen" binds= ["Menu"]]
 [connection signal="visibility_changed" from="UI/Screens/InGame/MassLabel" to="UI/Screens/InGame/MassLabel" method="_on_visibility_changed"]
-[connection signal="pressed" from="UI/Screens/Win/VBoxContainer/AcceptButton" to="UI" method="set_screen" binds= ["Menu"]]
-[connection signal="pressed" from="UI/Screens/Win/VBoxContainer/DenyButton" to="UI/Screens/Win/VBoxContainer/DenyButton" method="_on_pressed"]
+[connection signal="pressed" from="UI/Screens/Win/AcceptButton" to="UI" method="set_screen" binds= ["Menu"]]
