@@ -18,6 +18,9 @@ func _ready() -> void:
 	$UI/Screens/Options/GridContainer/SFXSlider.value = Save.data["sfx_volume"]
 	$UI/Screens/Options/GridContainer/ImperialMassCheck.button_pressed = Save.data["america_mode"]
 
+	set_up_button_sounds()
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
@@ -29,6 +32,7 @@ func _on_go_button_pressed() -> void:
 
 
 func _on_level_completed() -> void:
+	$LevelComplete.play()
 	Save.set_value("level_completion", int(Save.data["level_completion"]) | (1 << level_id))
 	level_completed.emit()
 
@@ -40,16 +44,22 @@ func _on_level_button_pressed(id: int) -> void:
 
 func _on_music_slider_value_changed(value: float) -> void:
 	Save.set_value("music_volume", value)
-	#TODO: set the volume of the music audio bus
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), 20 * log((value + 1) / 100))
 
 
 func _on_sfx_slider_value_changed(value: float) -> void:
 	Save.set_value("sfx_volume", value)
-	#TODO: set the volume of the sound effects audio bus
-
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), 20 * log((value + 1) / 100))
 
 func _on_imperial_mass_check_toggled(button_pressed: bool) -> void:
 	Save.set_value("america_mode", button_pressed)
+
+
+func set_up_button_sounds(from: Node = self):
+	for child in from.get_children():
+		set_up_button_sounds(child)
+		if child is BaseButton:
+			child.pressed.connect($Click.play)
 
 
 func load_level(id: int) -> void:
@@ -58,7 +68,6 @@ func load_level(id: int) -> void:
 	clear_level()
 	level = levels[id].instantiate() as Level
 	add_child(level)
-	set_up_sounds(level)
 	level.level_completed.connect(_on_level_completed, CONNECT_ONE_SHOT)
 	level.mass_inspected.connect($UI/Screens/InGame/MassLabel._on_mass_inspected)
 
@@ -107,15 +116,3 @@ func next_level(from_start: bool = false) -> void:
 	ui.set_screen("Win")
 	clear_level()
 	Save.set_value("seen_win_screen", true)
-
-
-# connect the body entered signals from all rigid body decendents of node
-# to the hit sound effect
-func set_up_sounds(node: Node) -> void:
-	if node is RigidBody2D:
-		# we use a lambda to strip the body parameter of the body_entered signal
-		node.body_entered.connect(func(_body): $HitSound.play())
-		node.contact_monitor = true
-		node.max_contacts_reported = max(node.max_contacts_reported, 5)
-	for child in node.get_children():
-		set_up_sounds(child)

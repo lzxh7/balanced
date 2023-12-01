@@ -50,6 +50,7 @@ func _set_recursive(property: StringName, value, node: Node) -> void:
 # gets the sprite2D's of all draggable nodes. to be used in main.gd to create
 # ghost objects
 func get_ghosts(from: Node = self) -> Array[Sprite2D]:
+	@warning_ignore("unassigned_variable")
 	var result: Array[Sprite2D]
 	for child in from.get_children():
 		result.append_array(get_ghosts(child))

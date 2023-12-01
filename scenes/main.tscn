@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://du8c2bhc3nl8"]
+[gd_scene load_steps=40 format=3 uid="uid://du8c2bhc3nl8"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_0cdf3"]
 [ext_resource type="PackedScene" uid="uid://llivulonyhm6" path="res://scenes/levels/level_7.tscn" id="2_asyaj"]
@@ -27,6 +27,9 @@
 [ext_resource type="Texture2D" uid="uid://dgqaj1i5bk1ju" path="res://textures/ui/go_button.png" id="18_tucju"]
 [ext_resource type="Texture2D" uid="uid://dr5nf4p78in05" path="res://textures/ui/button.png" id="25_ddmly"]
 [ext_resource type="Texture2D" uid="uid://bqq1tky7e56si" path="res://textures/ui/winner.png" id="27_6loem"]
+[ext_resource type="AudioStream" uid="uid://cqa6qr8cuos3l" path="res://sounds/click.wav" id="28_5q5kt"]
+[ext_resource type="AudioStream" uid="uid://dd1j6741utlh" path="res://sounds/level_complete.wav" id="28_txy5a"]
+[ext_resource type="AudioStream" uid="uid://dsxb2fnf1b00b" path="res://sounds/music.mp3" id="30_r8qjr"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_lm4fk"]
 action = &"home"
@@ -65,8 +68,8 @@ texture_margin_bottom = 12.0
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0cdf3")
-levels = Array[PackedScene]([ExtResource("2_ieaei"), ExtResource("3_kgg8q"), ExtResource("4_ljw4s"), ExtResource("5_35wm4"), ExtResource("6_4eh4t"), ExtResource("7_kgrfh"), ExtResource("9_rt7lx"), ExtResource("2_asyaj"), ExtResource("10_uatos"), ExtResource("11_taki0"), ExtResource("12_w75jh"), ExtResource("13_afn5w")])
-ghost_objects_color = Color(1, 1, 1, 0.313726)
+levels = Array[PackedScene]([ExtResource("2_ieaei"), ExtResource("3_kgg8q"), ExtResource("4_ljw4s"), ExtResource("5_35wm4"), ExtResource("6_4eh4t"), ExtResource("7_kgrfh"), ExtResource("9_rt7lx"), ExtResource("2_asyaj"), ExtResource("10_uatos"), ExtResource("11_taki0"), ExtResource("13_afn5w"), ExtResource("12_w75jh")])
+ghost_objects_color = Color(1, 1, 1, 0.305882)
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("2_di1ye")
@@ -81,7 +84,6 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="Menu" type="Control" parent="UI/Screens"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -262,7 +264,6 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Screens/InGame"]
-visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -272,6 +273,7 @@ offset_bottom = 69.0
 grow_horizontal = 0
 
 [node name="NextButton" type="Button" parent="UI/Screens/InGame/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
@@ -319,6 +321,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_ftudm")
 script = ExtResource("17_eji01")
 
 [node name="Win" type="Control" parent="UI/Screens"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -401,11 +404,23 @@ grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("27_6loem")
 
-[node name="HitSound" type="AudioStreamPlayer" parent="."]
-max_polyphony = 64
+[node name="LevelComplete" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("28_txy5a")
+volume_db = -3.682
+bus = &"SFX"
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("28_5q5kt")
+volume_db = 10.98
+bus = &"SFX"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("30_r8qjr")
+volume_db = -5.522
+autoplay = true
+bus = &"Music"
 
 [connection signal="level_completed" from="." to="UI/Screens/InGame/HBoxContainer/NextButton" method="show"]
-[connection signal="title_added" from="UI/Screens/Menu" to="." method="set_up_sounds"]
 [connection signal="visibility_changed" from="UI/Screens/Menu" to="UI/Screens/Menu" method="_on_visibility_changed"]
 [connection signal="pressed" from="UI/Screens/Menu/VBoxContainer/PlayButton" to="." method="next_level" binds= [true]]
 [connection signal="pressed" from="UI/Screens/Menu/VBoxContainer/PlayButton" to="UI" method="set_screen" binds= ["InGame"]]
@@ -417,6 +432,7 @@ max_polyphony = 64
 [connection signal="pressed" from="UI/Screens/Options/BackButton" to="UI" method="set_screen" binds= ["Menu"]]
 [connection signal="visibility_changed" from="UI/Screens/LevelSelect/LevelButtons" to="UI/Screens/LevelSelect/LevelButtons" method="_on_visibility_changed"]
 [connection signal="pressed" from="UI/Screens/LevelSelect/BackButton" to="UI" method="set_screen" binds= ["Menu"]]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/NextButton" to="." method="clear_ghosts"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/NextButton" to="." method="next_level"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/NextButton" to="UI/Screens/InGame/HBoxContainer/NextButton" method="hide"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/NextButton" to="UI/Screens/InGame/HBoxContainer/ResetButton" method="hide"]
@@ -424,12 +440,12 @@ max_polyphony = 64
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/ResetButton" to="." method="reset_level"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/ResetButton" to="UI/Screens/InGame/HBoxContainer/ResetButton" method="hide"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/ResetButton" to="UI/Screens/InGame/HBoxContainer/GoButton" method="show"]
-[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/GoButton" to="." method="_on_go_button_pressed"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/GoButton" to="." method="create_ghosts"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/GoButton" to="." method="_on_go_button_pressed"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/GoButton" to="UI/Screens/InGame/HBoxContainer/ResetButton" method="show"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/GoButton" to="UI/Screens/InGame/HBoxContainer/GoButton" method="hide"]
-[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="." method="clear_level"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="." method="clear_ghosts"]
+[connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="." method="clear_level"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="UI/Screens/InGame/HBoxContainer/NextButton" method="hide"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="UI/Screens/InGame/HBoxContainer/ResetButton" method="hide"]
 [connection signal="pressed" from="UI/Screens/InGame/HBoxContainer/HomeButton" to="UI/Screens/InGame/HBoxContainer/GoButton" method="show"]

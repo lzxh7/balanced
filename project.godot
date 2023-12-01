@@ -12,8 +12,13 @@ config_version=5
 
 config/name="Balanced"
 run/main_scene="res://scenes/main.tscn"
+config/use_custom_user_dir=true
 config/features=PackedStringArray("4.1", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/image="res://splash.png"
+boot_splash/fullsize=false
+config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [display]
 

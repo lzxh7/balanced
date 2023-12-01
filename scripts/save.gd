@@ -4,8 +4,8 @@ extends RefCounted
 const SAVE_PATH := "user://save.json"
 const DEFAULT_SAVE := {
 	"level_completion": 0,
-	"sfx_volume": 1.0,
-	"music_volume": 1.0,
+	"sfx_volume": 50,
+	"music_volume": 50,
 	"america_mode": false,
 	"seen_win_screen": false,
 }

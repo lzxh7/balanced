@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bkuxl7voktcvf"]
+[gd_scene load_steps=11 format=3 uid="uid://bkuxl7voktcvf"]
 
 [ext_resource type="Script" path="res://scripts/explosive.gd" id="1_6kk0j"]
 [ext_resource type="Texture2D" uid="uid://blg77ottyqxnm" path="res://textures/explosion_particle.png" id="2_cxrj8"]
 [ext_resource type="Script" path="res://scripts/free_particles.gd" id="3_crsuf"]
+[ext_resource type="AudioStream" uid="uid://dsquqywsqx7ue" path="res://sounds/explosion.wav" id="4_ns6ww"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_osktv"]
 
@@ -50,3 +51,6 @@ lifetime = 0.33
 one_shot = true
 explosiveness = 0.75
 script = ExtResource("3_crsuf")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GPUParticles2D"]
+stream = ExtResource("4_ns6ww")

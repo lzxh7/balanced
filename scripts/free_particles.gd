@@ -1,6 +1,5 @@
 extends GPUParticles2D
 
-# eww memory leaks
 
 var emitted := false
 
@@ -12,6 +11,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if emitting:
-		emitted = true
-	if emitted and not emitting:
+		if emitted == false:
+			$AudioStreamPlayer.play()
+			emitted = true
+	if emitted and $AudioStreamPlayer.playing == false:
 		queue_free()
