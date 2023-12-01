@@ -10,4 +10,4 @@ Explosion Sound: [Free Sound Effects.com](https://www.freesoundeffects.com/free-
 
 Music: CodeManu at [OpenGameArt.org](https://opengameart.org/content/platformer-game-music-pack)
 
-All other assets and code are by me and licenced under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+All other assets and code are by me and licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
