@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvc6tygxx3181"]
-
-[ext_resource type="PackedScene" uid="uid://wvgl1o7alnl" path="res://scenes/physics_objects/dynamite_stick.tscn" id="1_lwfc1"]
-[ext_resource type="PackedScene" uid="uid://bkuxl7voktcvf" path="res://scenes/explosive.tscn" id="2_rystj"]
-
-[node name="DynamiteStick" instance=ExtResource("1_lwfc1")]
-
-[node name="Explosive" parent="." index="2" instance=ExtResource("2_rystj")]
-explosiveness = 3.7e+06

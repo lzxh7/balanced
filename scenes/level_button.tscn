@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://do1dau3njtjou"]
-
-[node name="Button" type="Button"]
-custom_minimum_size = Vector2(100, 100)
-offset_right = 30.0
-offset_bottom = 25.0
-focus_mode = 0
-theme_override_font_sizes/font_size = 48
-icon_alignment = 1
