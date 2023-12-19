@@ -23,6 +23,7 @@ config/windows_native_icon="res://icon.ico"
 [display]
 
 window/size/resizable=false
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
